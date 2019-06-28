@@ -1,0 +1,12 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.dependency.syncWithFolderExplorer": true,
+    "java.test.config": [
+        {
+            "name": "main",
+            "workingDirectory": "${workspaceFolder}",
+            "vmargs": ["-Xms1G", "-Xmx3G"]
+        }
+    ],
+    "java.test.defaultConfig": "main"
+}

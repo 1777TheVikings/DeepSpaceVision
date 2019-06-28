@@ -1,0 +1,3 @@
+*.sh eol=lf
+*.service eol=lf
+.bat eol=crlf
