@@ -16,19 +16,19 @@
         {
             "label": "Run .jar (single image)",
             "type": "shell",
-            "command": "gradlew.bat run --args=\"src/test/resources/camtest1.jpg output.jpg\"",
+            "command": "java -Xmx3G -jar build/libs/DeepSpaceVision.jar src/test/resources/camtest1.jpg output.jpg",
             "problemMatcher": []
         },
         {
             "label": "Run .jar (multiple images)",
             "type": "shell",
-            "command": "gradlew.bat run --args=\"\"src/test/resources/camtest1.jpg,src/test/resources/camtest2.jpg,src/test/resources/camtest3.jpg\" output.avi\"",
+            "command": "java -Xmx3G -jar build/libs/DeepSpaceVision.jar src/test/resources/camtest1.jpg,src/test/resources/camtest2.jpg,src/test/resources/camtest3.jpg output.avi",
             "problemMatcher": []
         },
         {
             "label": "Run .jar (webcam)",
             "type": "shell",
-            "command": "gradlew.bat run --args=\"0 output.avi\"",
+            "command": "java -Xmx3G -jar build/libs/DeepSpaceVision.jar 0 output.avi",
             "problemMatcher": []
         },
         {
