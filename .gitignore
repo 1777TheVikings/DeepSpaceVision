@@ -45,4 +45,6 @@ gradle-app.setting
 
 # -- PROJECT -- Based off of our specific needs
 
-output.*
+output.jpg
+output.png
+output.avi
