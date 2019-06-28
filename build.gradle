@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    // This dependency is found on compile classpath of this component and consumers.
+    // Not sure what this is, it's added by default
     implementation 'com.google.guava:guava:27.0.1-jre'
 
     // Use JUnit test framework

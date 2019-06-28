@@ -15,7 +15,7 @@ public class WebcamSource implements ISource {
         rval = cam.read(new Mat());
     }
 
-    public WebcamSource(int camNumber, Size frameSize, int fps) {
+    public WebcamSource(int camNumber, Size frameSize, double fps) {
         cam = new VideoCapture(camNumber);
         cam.set(3, frameSize.width);
         cam.set(4, frameSize.height);
@@ -33,6 +33,11 @@ public class WebcamSource implements ISource {
     @Override
     public Size GetFrameSize() {
         return new Size(cam.get(3), cam.get(4));
+    }
+
+    @Override
+    public double GetFrameRate() {
+        return cam.get(5);
     }
 
     @Override

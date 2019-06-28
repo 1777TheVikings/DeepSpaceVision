@@ -14,15 +14,34 @@ public class App {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
         ISource source;
-        if (args.length == 1) {
-            source = new ImageSource(args[0]);
-        } else if (args.length >= 2) {
-            source = new MultiImageSource(args);
-        } else {
-            source = new WebcamSource(0);
+        IOutput output;
+        
+        if (args.length < 2) {
+            System.err.println("Missing arguments for source and output");
+            System.exit(1);
         }
+
+        try {
+            // check for webcam ID
+            int cameraNum = Integer.parseInt(args[0]);
+            source = new WebcamSource(cameraNum);
+        } catch (NumberFormatException ex) {
+            // probably a file or list of files instead
+            String[] split = args[0].split(",");
+            if (split.length > 1)
+                source = new MultiImageSource(split);
+            else
+                source = new ImageSource(args[0]);
+        }
+
+        // only .avi file formats are guaranteed to work with OpenCV, so we can safely assume that
+        // it's the only option people will use
+        if (args[1].substring(args[1].length() - 4).equals(".avi"))
+            output = new VideoOutput(args[1], source.GetFrameRate(), source.GetFrameSize());
+        else
+            output = new ImageOutput(args[1]);
+        
         Processor processor = new Processor();
-        IOutput output = new ImageOutput("output.jpg");
         
         try {
             while (source.HasMoreFrames()) {

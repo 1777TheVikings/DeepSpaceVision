@@ -30,6 +30,11 @@ public class MultiImageSource implements ISource {
     }
 
     @Override
+    public double GetFrameRate() {
+        return 1.0;
+    }
+
+    @Override
     public boolean HasMoreFrames() {
         return index < images.size();
     }
