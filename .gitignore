@@ -41,3 +41,8 @@ gradle-app.setting
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+
+# -- PROJECT -- Based off of our specific needs
+
+output.*

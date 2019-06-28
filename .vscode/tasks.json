@@ -16,7 +16,7 @@
         {
             "label": "Run .jar",
             "type": "shell",
-            "command": "gradlew.bat run --args='camtest1.jpg'",
+            "command": "gradlew.bat run --args='src/test/resources/camtest1.jpg'",
             "problemMatcher": []
         },
         {
