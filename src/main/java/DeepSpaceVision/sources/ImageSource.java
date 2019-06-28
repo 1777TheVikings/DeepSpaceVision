@@ -4,9 +4,9 @@ import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import DeepSpaceVision.ISource;
+import DeepSpaceVision.Source;
 
-public class ImageSource implements ISource {
+public class ImageSource extends Source {
     private Mat image;
     private boolean hasRead = false;
 

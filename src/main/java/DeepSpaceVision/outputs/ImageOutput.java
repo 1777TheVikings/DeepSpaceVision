@@ -3,9 +3,9 @@ package DeepSpaceVision.outputs;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import DeepSpaceVision.IOutput;
+import DeepSpaceVision.Output;
 
-public class ImageOutput implements IOutput {
+public class ImageOutput extends Output {
     private Mat output;
     private String fname;
 

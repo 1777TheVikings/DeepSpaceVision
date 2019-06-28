@@ -6,9 +6,9 @@ import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import DeepSpaceVision.ISource;
+import DeepSpaceVision.Source;
 
-public class MultiImageSource implements ISource {
+public class MultiImageSource extends Source {
     private ArrayList<Mat> images = new ArrayList<>();
     private int index = 0;
 

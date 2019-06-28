@@ -4,12 +4,12 @@ import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.videoio.VideoWriter;
 
-import DeepSpaceVision.IOutput;
+import DeepSpaceVision.Output;
 
 /**
  * Sends processed frames to a video file. This is only guaranteed to work with the .avi file extension.
  */
-public class VideoOutput implements IOutput {
+public class VideoOutput extends Output {
     private static int FOURCC = VideoWriter.fourcc('M', 'J', 'P', 'G');
     private VideoWriter output;
 
@@ -24,6 +24,7 @@ public class VideoOutput implements IOutput {
 
     @Override
     public void close() {
-        output.release();
+        if (output.isOpened())
+            output.release();
     }
 }

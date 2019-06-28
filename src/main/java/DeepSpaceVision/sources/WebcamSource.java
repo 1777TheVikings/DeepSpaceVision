@@ -4,9 +4,9 @@ import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.videoio.VideoCapture;
 
-import DeepSpaceVision.ISource;
+import DeepSpaceVision.Source;
 
-public class WebcamSource implements ISource {
+public class WebcamSource extends Source {
     private VideoCapture cam;
     private boolean rval;
 
@@ -47,6 +47,7 @@ public class WebcamSource implements ISource {
 
     @Override
     public void close() {
-        cam.release();
+        if (cam.isOpened())
+            cam.release();
     }
 }
