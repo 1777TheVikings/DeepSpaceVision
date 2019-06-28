@@ -19,30 +19,31 @@ public class App {
         } else if (args.length >= 2) {
             source = new MultiImageSource(args);
         } else {
-            source = new ImageSource("");
+            source = new WebcamSource(0);
         }
         Processor processor = new Processor();
         IOutput output = new ImageOutput("output.jpg");
-
-        while (source.HasMoreFrames()) {
-            Mat frame = source.Read();
-            RotatedRect[] outData = processor.Process(frame);
-            Mat outFrame = frame;
-            if (outData.length > 0)
-            {
-                outFrame = processor.DrawOutput(frame, outData);
-                System.out.println("First center: " + outData[0].center);
-                System.out.println("Second center: " + outData[1].center);
-            }
-            output.Write(outFrame);
-        }
-
+        
         try {
-            source.close();
-            output.close();
-        } catch (IOException ex) {
-            System.out.println("Error when closing ISource");
-            ex.printStackTrace();
+            while (source.HasMoreFrames()) {
+                Mat frame = source.Read();
+                RotatedRect[] outData = processor.Process(frame);
+                Mat outFrame = frame;
+                if (outData.length > 0)
+                {
+                    outFrame = processor.DrawOutput(frame, outData);
+                    System.out.println("First center: " + outData[0].center);
+                    System.out.println("Second center: " + outData[1].center);
+                }
+                output.Write(outFrame);
+            }
+        } finally {
+            try {
+                source.close();
+                output.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
