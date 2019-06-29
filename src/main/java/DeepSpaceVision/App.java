@@ -34,14 +34,14 @@ public class App {
                 source = new ImageSource(args[0]);
         }
 
-        // // only .avi file formats are guaranteed to work with OpenCV, so we can safely assume that
-        // // it's the only option people will use
-        // if (args[1].substring(args[1].length() - 4).equals(".avi"))
-        //     output = new VideoOutput(args[1], source.GetFrameRate(), source.GetFrameSize());
-        // else
-        //     output = new ImageOutput(args[1]);
+        // only .avi file formats are guaranteed to work with OpenCV, so we can safely assume that
+        // it's the only option people will use
+        if (args[1].substring(args[1].length() - 4).equals(".avi"))
+            output = new VideoOutput(args[1], source.GetFrameRate(), source.GetFrameSize());
+        else
+            output = new ImageOutput(args[1]);
 
-        output = new TcpServerOutput(12345);
+        // output = new TcpServerOutput(12345);
 
         // politely ask the JVM to call close() on our source/output
         // covers Ctrl+C shutdowns normally, but does not work on Windows when using "gradle run"
