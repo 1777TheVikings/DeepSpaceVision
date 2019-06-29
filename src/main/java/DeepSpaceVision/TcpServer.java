@@ -60,7 +60,7 @@ public class TcpServer extends Thread {
                 synchronized (dataQueue) {
                     RotatedRect[] out = dataQueue.poll();
                     if (out != null && out.length > 0) {
-                        writer.write(String.valueOf((out[0].center.x + out[1].center.x) / 2.0));
+                        writer.write(String.valueOf((out[0].center.x + out[1].center.x) / 2.0) + "\n");
                         writer.flush();
                     }
                 }
