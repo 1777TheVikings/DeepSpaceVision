@@ -42,8 +42,6 @@ public class App {
         else
             output = new ImageOutput(args[1]);
 
-        // output = new TcpServerOutput(12345);
-
         // politely ask the JVM to call close() on our source/output
         // covers Ctrl+C shutdowns normally, but does not work on Windows when using "gradle run"
         Runtime.getRuntime().addShutdownHook(source.new SourceShutdownHook());
