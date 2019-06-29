@@ -1,6 +1,7 @@
 package DeepSpaceVision;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -48,9 +49,13 @@ public class App {
         Runtime.getRuntime().addShutdownHook(source.new SourceShutdownHook());
         Runtime.getRuntime().addShutdownHook(output.new OutputShutdownHook());
 
+        AtomicBoolean isRunning = new AtomicBoolean(true);
+
         Processor processor = new Processor();
-        
-        while (source.HasMoreFrames()) {
+        TcpServer server = new TcpServer(5800, () -> { isRunning.set(true); });
+        server.start();
+
+        while (source.HasMoreFrames() && isRunning.get()) {
             Mat frame = source.Read();
             RotatedRect[] outData = processor.Process(frame);
             Mat outFrame = frame;
@@ -61,6 +66,7 @@ public class App {
                 System.out.println("Second center: " + outData[1].center);
             }
             output.Write(outFrame, outData);
+            server.dataQueue.add(outData);
         }
         try {
             source.close();
