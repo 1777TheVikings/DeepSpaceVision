@@ -55,7 +55,7 @@ jar {
 
 remotes {
     jetson {
-        host = 'jetson-nano.local'
+        host = 'tegra-ubuntu.local'
         user = 'robotics'
         password = 'MrRoboto'
     }
