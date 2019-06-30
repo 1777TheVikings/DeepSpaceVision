@@ -1,6 +1,7 @@
 package DeepSpaceVision.outputs;
 
 import org.opencv.core.Mat;
+import org.opencv.core.RotatedRect;
 import org.opencv.imgcodecs.Imgcodecs;
 
 import DeepSpaceVision.Output;
@@ -14,7 +15,7 @@ public class ImageOutput extends Output {
     }
 
     @Override
-    public void Write(Mat frame) {
+    public void Write(Mat frame, RotatedRect[] data) {
         output = frame;
     }
 

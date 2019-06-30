@@ -1,6 +1,7 @@
 package DeepSpaceVision.outputs;
 
 import org.opencv.core.Mat;
+import org.opencv.core.RotatedRect;
 import org.opencv.core.Size;
 import org.opencv.videoio.VideoWriter;
 
@@ -18,7 +19,7 @@ public class VideoOutput extends Output {
     }
 
     @Override
-    public void Write(Mat frame) {
+    public void Write(Mat frame, RotatedRect[] data) {
         output.write(frame);
     }
 
