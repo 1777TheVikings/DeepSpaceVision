@@ -52,6 +52,7 @@ public class TcpServer extends Thread {
                 if (reader.ready()) {
                     String in = reader.readLine();
                     if (in.startsWith("shutdown")) {
+                        System.out.println("[SERVER] Received shutdown request from client");
                         onShutdown.run();
                         break;
                     }
