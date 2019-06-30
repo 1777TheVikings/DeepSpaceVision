@@ -9,7 +9,7 @@ Some cool features:
     - Runs in a separate thread to keep blocking calls from stalling the main processing
 - Proper build/deploy system using Gradle ([build.gradle](https://github.com/1777TheVikings/DeepSpaceVision/blob/master/build.gradle))
     - Builds a fat .jar file that contains the OpenCV .jar
-    - Deploys to `jetson-nano.local` over SSH, stopping and starting a [custom service](https://github.com/1777TheVikings/DeepSpaceVision/blob/master/src/main/resources/vision-code.service) along the way
+    - Deploys to a Jetson Nano at `tegra-ubuntu.local` over SSH, stopping and starting a [custom service](https://github.com/1777TheVikings/DeepSpaceVision/blob/master/src/main/resources/vision-code.service) along the way
 - Unit testing of the processing pipeline
     - Ensures changes to the pipeline don't break the detection or cause significant inaccuracy
 
