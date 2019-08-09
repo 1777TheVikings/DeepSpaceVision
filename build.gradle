@@ -34,7 +34,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 
     // OpenCV library
-    implementation files('C:\\Users\\Colby\\opencv\\build\\java\\opencv-410.jar')
+    implementation files(new File(System.getProperty("user.home"), 'opencv\\build\\java\\opencv-410.jar'))
 }
 
 // Define the main class for the application
