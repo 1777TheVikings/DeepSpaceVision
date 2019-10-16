@@ -83,6 +83,15 @@ public class Processor {
         // draw midline
         Imgproc.line(output, new Point(data.getCenterX(), 0.0), new Point(data.getCenterX(), output.size().height), new Scalar(255, 0, 0));
 
+        // draw angle
+        Imgproc.putText(output,
+            String.valueOf(data.getAngle()),
+            new Point(data.getCenterX() + 25, 75),
+            Imgproc.FONT_HERSHEY_SIMPLEX,
+            3,
+            new Scalar(255, 255, 255)
+        );
+
         return output;
     }
 
