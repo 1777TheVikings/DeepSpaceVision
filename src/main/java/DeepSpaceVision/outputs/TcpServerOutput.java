@@ -3,9 +3,9 @@ package DeepSpaceVision.outputs;
 import java.io.IOException;
 
 import org.opencv.core.Mat;
-import org.opencv.core.RotatedRect;
 
 import DeepSpaceVision.Output;
+import DeepSpaceVision.TargetData;
 import DeepSpaceVision.TcpServer;
 
 public class TcpServerOutput extends Output {
@@ -17,7 +17,7 @@ public class TcpServerOutput extends Output {
     }
 
     @Override
-    public void Write(Mat frame, RotatedRect[] data) {
+    public void Write(Mat frame, TargetData data) {
         synchronized(serverThread.dataQueue) {
             serverThread.dataQueue.add(data);
         }

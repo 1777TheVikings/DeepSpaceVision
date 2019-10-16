@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.RotatedRect;
 
 import DeepSpaceVision.outputs.*;
 import DeepSpaceVision.sources.*;
@@ -67,14 +66,15 @@ public class App {
         for (Output output : outputs)
             Runtime.getRuntime().addShutdownHook(output.new OutputShutdownHook());
 
-        Processor processor = new Processor();
+        TargetData.Factory targetDataFactory = new TargetData.Factory(60.0, source.GetFrameSize().width);
+        Processor processor = new Processor(targetDataFactory);
 
         System.out.println("[MAIN] Starting main loop...");
         while (source.HasMoreFrames() && isRunning.get()) {
             Mat frame = source.Read();
-            RotatedRect[] outData = processor.Process(frame);
+            TargetData outData = processor.Process(frame);
             Mat outFrame = frame;
-            if (outData.length > 0)
+            if (outData != null)
             {
                 outFrame = processor.DrawOutput(frame, outData);  // TODO: Move this somewhere else
                 // System.out.println("First center: " + outData[0].center);

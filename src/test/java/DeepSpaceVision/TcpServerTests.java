@@ -35,10 +35,18 @@ public class TcpServerTests {
             client = new Socket("localhost", 50000);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-            RotatedRect[] data = new RotatedRect[] {
-                new RotatedRect(),
-                new RotatedRect()
-            };
+            // RotatedRect[] data = new RotatedRect[] {
+            //     new RotatedRect(),
+            //     new RotatedRect()
+            // };
+            TargetData data = new TargetData(
+                new RotatedRect[] {
+                    new RotatedRect(),
+                    new RotatedRect()
+                },
+                60.0,
+                640.0
+            );
             synchronized(serverThread.dataQueue) {
                 serverThread.dataQueue.add(data);
             }
@@ -73,7 +81,7 @@ public class TcpServerTests {
             client = new Socket("localhost", 50001);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-            RotatedRect[] data = new RotatedRect[0];
+            TargetData data = null;
             synchronized(serverThread.dataQueue) {
                 serverThread.dataQueue.add(data);
             }

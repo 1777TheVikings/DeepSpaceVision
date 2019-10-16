@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
+
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -20,7 +22,14 @@ public class Processor {
     private static Scalar HSV_LOWER_BOUND = new Scalar(40, 100, 100);
     private static Scalar HSV_UPPER_BOUND = new Scalar(100, 255, 255);
 
-    public RotatedRect[] Process(Mat input) {
+    private TargetData.Factory dataFactory;
+
+    public Processor(TargetData.Factory dataFactory) {
+        this.dataFactory = dataFactory;
+    }
+
+    @Nullable
+    public TargetData Process(Mat input) {
         Mat hsv = input.clone();
         Imgproc.cvtColor(input, hsv, Imgproc.COLOR_BGR2HSV);
         Core.inRange(hsv, HSV_LOWER_BOUND, HSV_UPPER_BOUND, hsv);
@@ -40,7 +49,7 @@ public class Processor {
         List<RotatedRect> rects = filteredContours.stream()
             .map(this::ContourToRotatedRect)
             .collect(Collectors.toList());
-        RotatedRect[] output = new RotatedRect[0];
+        TargetData output = null;
         for (RotatedRect rect : rects) {
             Predicate<? super RotatedRect> predicate;
             if (rect.angle < -45.0)  // tilted towards right
@@ -52,20 +61,28 @@ public class Processor {
                 .filter(predicate)
                 .sorted((r1, r2) -> (DistanceFormula(r1.center, rect.center) > DistanceFormula(r2.center, rect.center)) ? 1 : -1)
                 .collect(Collectors.toList());
-            if (matchingRects.size() > 0)  // we have a match!
-                output = new RotatedRect[] { rect, matchingRects.get(0) };
+            if (matchingRects.size() > 0) {  // we have a match!
+                RotatedRect[] outputRects = new RotatedRect[] { rect, matchingRects.get(0) };
+                output = dataFactory.createTargetData(outputRects);
+            }
         }
 
         return output;
     }
 
-    public Mat DrawOutput(Mat input, RotatedRect[] rects) {
+    public Mat DrawOutput(Mat input, TargetData data) {
         Mat output = input.clone();
+
+        // draw target strips
         ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>(
-            Arrays.asList(rects).stream()
+            Arrays.asList(data.getRects()).stream()
                 .map(this::RotatedRectToContour)
                 .collect(Collectors.toList()));
         Imgproc.drawContours(output, contours, -1, new Scalar(255, 0, 0));
+        
+        // draw midline
+        Imgproc.line(output, new Point(data.getCenterX(), 0.0), new Point(data.getCenterX(), output.size().height), new Scalar(255, 0, 0));
+
         return output;
     }
 

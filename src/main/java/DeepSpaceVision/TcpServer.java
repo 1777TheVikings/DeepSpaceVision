@@ -4,8 +4,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 
-import org.opencv.core.RotatedRect;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -20,7 +18,7 @@ public class TcpServer extends Thread {
     private BufferedReader reader;
     private BufferedWriter writer;
     
-    public LinkedList<RotatedRect[]> dataQueue = new LinkedList<>();
+    public LinkedList<TargetData> dataQueue = new LinkedList<>();
 
     public TcpServer(int port, Runnable onShutdown) {
         this.onShutdown = onShutdown;
@@ -59,9 +57,9 @@ public class TcpServer extends Thread {
                 }
 
                 synchronized (dataQueue) {
-                    RotatedRect[] out = dataQueue.poll();
-                    if (out != null && out.length > 0) {
-                        writer.write(String.valueOf((out[0].center.x + out[1].center.x) / 2.0) + "\n");
+                    TargetData out = dataQueue.poll();
+                    if (out != null) {
+                        writer.write(String.valueOf(out.getAngle()) + "\n");
                         writer.flush();
                     }
                 }
