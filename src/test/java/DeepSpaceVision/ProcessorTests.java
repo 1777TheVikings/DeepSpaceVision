@@ -1,6 +1,7 @@
 package DeepSpaceVision;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -18,6 +19,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 public class ProcessorTests
  {
     private Processor processor;
+    private TargetData.Factory dataFactory;
 
     @BeforeAll
     public static void setUpAll() {
@@ -26,7 +28,8 @@ public class ProcessorTests
 
     @BeforeEach
     public void setUpEach() {
-        processor = new Processor();
+        dataFactory = new TargetData.Factory(60.0, 640);
+        processor = new Processor(dataFactory);
     }
 
     @DisplayName("Should detect two RotatedRects in a valid image")
@@ -38,16 +41,16 @@ public class ProcessorTests
     })
     public void testPositiveDetection(String fname) {
         Mat frame = Imgcodecs.imread(fname);
-        RotatedRect[] outData = processor.Process(frame);
-        assertEquals(2, outData.length, "Failed on " + fname);
+        TargetData outData = processor.Process(frame);
+        assertNotNull(outData, "Failed on " + fname);
     }
 
     @DisplayName("Should not detect any RotatedRects in an invalid image")
     @Test
     public void testNegativeDetection() {
         Mat frame = Imgcodecs.imread("src/test/resources/fail.jpg");
-        RotatedRect[] outData = processor.Process(frame);
-        assertEquals(0, outData.length);
+        TargetData outData = processor.Process(frame);
+        assertNull(outData);
     }
 
     @DisplayName("Should detect RotatedRects with +-10px accuracy")
@@ -59,16 +62,17 @@ public class ProcessorTests
     })
     public void testPositionAccuracy(String fname, int x1, int y1, int x2, int y2) {
         Mat frame = Imgcodecs.imread(fname);
-        RotatedRect[] outData = processor.Process(frame);
+        TargetData outData = processor.Process(frame);
+        RotatedRect[] rects = outData.getRects();
 
-        assertTrue(outData[0].center.x > x1 - 10);
-        assertTrue(outData[0].center.x < x1 + 10);
-        assertTrue(outData[0].center.y > y1 - 10);
-        assertTrue(outData[0].center.y < y1 + 10);
+        assertTrue(rects[0].center.x > x1 - 10);
+        assertTrue(rects[0].center.x < x1 + 10);
+        assertTrue(rects[0].center.y > y1 - 10);
+        assertTrue(rects[0].center.y < y1 + 10);
 
-        assertTrue(outData[1].center.x > x2 - 10);
-        assertTrue(outData[1].center.x < x2 + 10);
-        assertTrue(outData[1].center.y > y2 - 10);
-        assertTrue(outData[1].center.y < y2 + 10);
+        assertTrue(rects[1].center.x > x2 - 10);
+        assertTrue(rects[1].center.x < x2 + 10);
+        assertTrue(rects[1].center.y > y2 - 10);
+        assertTrue(rects[1].center.y < y2 + 10);
     }
 }

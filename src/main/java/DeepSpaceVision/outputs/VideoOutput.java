@@ -1,11 +1,11 @@
 package DeepSpaceVision.outputs;
 
 import org.opencv.core.Mat;
-import org.opencv.core.RotatedRect;
 import org.opencv.core.Size;
 import org.opencv.videoio.VideoWriter;
 
 import DeepSpaceVision.Output;
+import DeepSpaceVision.TargetData;
 
 /**
  * Sends processed frames to a video file. This is only guaranteed to work with the .avi file extension.
@@ -19,7 +19,7 @@ public class VideoOutput extends Output {
     }
 
     @Override
-    public void Write(Mat frame, RotatedRect[] data) {
+    public void Write(Mat frame, TargetData data) {
         output.write(frame);
     }
 
