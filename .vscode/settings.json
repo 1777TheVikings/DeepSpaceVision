@@ -8,5 +8,11 @@
             "vmargs": ["-Xms1G", "-Xmx3G"]
         }
     ],
-    "java.test.defaultConfig": "main"
+    "java.test.defaultConfig": "main",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
 }

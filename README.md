@@ -21,27 +21,27 @@ Some cool features:
 
     a. Download and run the [Java 11 JDK installer](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html) for your system. OpenJDK should also work for Linux users. (Note: in Java 11, the JRE is included in the JDK installer.)
 
-    b. Find where the installer put the JDK. There should be a folder called `jdk-11.X.X` in `C:\\Program Files\\Java\\` if you used the 64-bit installer, or in `C:\\Program Files (x86)\\Java` if you used the 32-bit installer. Either way, remember what the exact name of the JDK folder is (e.g. `jdk-11.0.3`).
+    b. Find where the installer put the JDK. There should be a folder called `jdk-11.X.X` in `C:\Program Files\Java\` if you used the 64-bit installer, or in `C:\Program Files (x86)\Java` if you used the 32-bit installer. Either way, remember what the exact name of the JDK folder is (e.g. `jdk-11.0.3`).
 
     c. Open Control Panel and enter "System and Security" -> "System" -> "Advanced system settings". In the "Advanced" tab, click "Environment Variables..."
 
     d. Click on "Path" in "System variables" and click "Edit..."
 
-    e. Click "New". In the new field, type `C:\\Program Files\\Java\\<FOLDER_NAME_FROM_STEP_B>\\bin`.
+    e. Click "New". In the new field, type `C:\Program Files\Java\<FOLDER_NAME_FROM_STEP_B>\bin`.
 
-    f. Click "OK" to exit the Path editing window. Under "System variables", click "New...". Set the variable name to `JAVA_HOME` and the variable value to `C:\\Program Files\\Java\\<FOLDER_NAME_FROM_STEP_B>`. Click "OK" to save it.
+    f. Click "OK" to exit the Path editing window. Under "System variables", click "New...". Set the variable name to `JAVA_HOME` and the variable value to `C:\Program Files\Java\<FOLDER_NAME_FROM_STEP_B>`. Click "OK" to save it.
 
 2. Install OpenCV 4.1.0.
 
     a. If you don' want to deal with compiling from source, you can download the [Windows installer](https://opencv.org/releases/) instead. A custom build isn't necessary for this use case.
 
-    b. After the installer extracts, move the `opencv` folder to your user root folder (probably `C:\\Users\\<YOUR_USERNAME_HERE>`).
+    b. After the installer extracts, move the `opencv` folder to your user root folder (probably `C:\Users\<YOUR_USERNAME_HERE>`).
 
     c. Open Control Panel and enter "System and Security" -> "System" -> "Advanced system settings". In the "Advanced" tab, click "Environment Variables..."
 
     d. Click on "Path" in "System variables" and click "Edit..."
 
-    e. Click "New". In the new field, type `C:\\Users\\<YOUR_USERNAME_HERE>\\opencv\\build\\java\\x64`. If you use a 32-bit install of Windows 10, replace `x64` at the end with `x86`.
+    e. Click "New". In the new field, type `C:\Users\<YOUR_USERNAME_HERE>\opencv\build\java\x64`. If you use a 32-bit install of Windows 10, replace `x64` at the end with `x86`.
 
     f. Restart your computer.
 
