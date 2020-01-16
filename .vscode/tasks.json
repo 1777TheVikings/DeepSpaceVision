@@ -16,25 +16,25 @@
         {
             "label": "Run .jar (single image -> image)",
             "type": "shell",
-            "command": "java -Xmx3G -jar build/libs/DeepSpaceVision.jar src/test/resources/camtest1.jpg output.jpg",
+            "command": "java -Xmx1G -jar build/libs/DeepSpaceVision.jar src/test/resources/camtest1.jpg output.jpg",
             "problemMatcher": []
         },
         {
             "label": "Run .jar (multiple images -> video)",
             "type": "shell",
-            "command": "java -Xmx3G -jar build/libs/DeepSpaceVision.jar src/test/resources/camtest1.jpg,src/test/resources/camtest2.jpg,src/test/resources/camtest3.jpg output.avi",
+            "command": "java -Xmx1G -jar build/libs/DeepSpaceVision.jar src/test/resources/camtest1.jpg,src/test/resources/camtest2.jpg,src/test/resources/camtest3.jpg output.avi",
             "problemMatcher": []
         },
         {
             "label": "Run .jar (webcam -> video)",
             "type": "shell",
-            "command": "java -Xmx3G -jar build/libs/DeepSpaceVision.jar 0 output.avi",
+            "command": "java -Xmx1G -jar build/libs/DeepSpaceVision.jar 0 output.avi",
             "problemMatcher": []
         },
         {
             "label": "Run .jar (webcam -> video + server)",
             "type": "shell",
-            "command": "java -Xmx3G -jar build/libs/DeepSpaceVision.jar 0 output.avi,5800",
+            "command": "java -Xmx1G -jar build/libs/DeepSpaceVision.jar 0 output.avi,5800",
             "problemMatcher": []
         },
         {
